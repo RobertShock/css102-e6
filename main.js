@@ -95,5 +95,7 @@ buildDomString()
 printProductArrayToDom(allProducts);
 
 
+
+
  
 
