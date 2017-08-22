@@ -45,6 +45,7 @@ var product5 = {
   soldOut: true
 };
 
+
 allProducts.push(product1)
 allProducts.push(product2)
 allProducts.push(product3)
@@ -52,6 +53,9 @@ allProducts.push(product4)
 allProducts.push(product5)
 
 console.log("All my weird baby products: ", allProducts);
+
+
+
 
 var productContainer = document.getElementById("product-container");
 
@@ -61,30 +65,32 @@ var productContainer = document.getElementById("product-container");
     var domString = "";
 
     domString += '<section class="product">';
-    domString +=  '<div class="title">';
+    domString +=  '<div class="title child">';
     domString +=    '<h2>' + product.name + '</h2>';
     domString +=  '</div>';
-    domString +=  '<div class="image">';
+    domString +=  '<div class="image child">';
     domString +=    '<img src="' + product.imagePath + '" alt="' + product.imageAlt + '">';
     domString +=  '</div>';
-    domString +=  '<div class="description">';
+    domString +=  '<div class="description child">';
     domString +=    '<p>' + product.description + '</p>';
     domString +=    '<h6>$' + product.price + '</h6>';
     domString +=  '</div>';
     if (product.soldOut) {
-        domString += '<div class="sold-out">'
+        domString += '<div class="sold-out child">'
         domString += '<img src="./images/soldOut.png" alt="Sold Out">'
         domString += '</div>';
     }
+
 
     domString += '</section>';
     return domString;
   }
 
-buildDomString()
+
 
   function printProductArrayToDom(productArray){
     for (var i = 0; i < productArray.length; i++) {
+
 
   var currentProduct = productArray[i];
   var productDomString = buildDomString(currentProduct);
@@ -94,8 +100,47 @@ buildDomString()
 
 printProductArrayToDom(allProducts);
 
+var selectedCard;
+
+document.getElementById("product-container").addEventListener("click", function(event){
+  changeBorder(event);
+  printSelectedDescription();
+})
 
 
+function changeBorder(event) {
+  if (event.target.classList.contains("child")){
+    selectedCard = event.target.parentNode;
+  } else if (event.target.parentNode.parentNode.classList.contains("product")){
+    selectedCard = event.target.parentNode.parentNode;
+  } else if (event.target.classList.contains("product")){
+    selectedCard = event.target;
+  }
 
+    selectedCard.classList.add("border-funsies");
+}
  
+function printSelectedDescription() {
+
+  var description = selectedCard.childNodes[2].childNodes[0].innerHTML;
+  console.log(description);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
