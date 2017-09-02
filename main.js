@@ -1,6 +1,17 @@
-var allProducts = [];
+//No More Var - let and const
+//Fat arrow functions
+//Object literal value shorthand notification
+//String template literals
 
-var product1 = {
+
+
+
+
+
+
+const allProducts = [];
+
+const product1 = {
   name: "Mop Attire",
   imagePath: "./images/mopAttire.jpg",
   imageAlt: "Product: Mop Attire",
@@ -9,7 +20,9 @@ var product1 = {
   soldOut: false
 };
 
-var product2 = {
+product1.soldOut = true;
+
+const product2 = {
   name: "Taco Suit",
   imagePath: "./images/tacoSuit.jpg",
   imageAlt: "Product: Taco Suit",
@@ -18,7 +31,7 @@ var product2 = {
   soldOut: false
 };
 
-var product3 = {
+const product3 = {
   name: "Neck Decoration",
   imagePath: "./images/neckDecoration.jpg",
   imageAlt: "Product: Neck Decoration",
@@ -27,7 +40,7 @@ var product3 = {
   soldOut: false
 };
 
-var product4 = {
+const product4 = {
   name: "Head Ornament",
   imagePath: "./images/headOrnament.jpg",
   imageAlt: "Product: Head Ornament",
@@ -36,7 +49,7 @@ var product4 = {
   soldOut: true
 };
 
-var product5 = {
+const product5 = {
   name: "Boob Hat",
   imagePath: "./images/boobHat.jpg",
   imageAlt: "Product: Boob Hat",
@@ -52,16 +65,25 @@ allProducts.push(product3)
 allProducts.push(product4)
 allProducts.push(product5)
 
+const addNewProduct = (name, imagePath, imageAlt, description, price, soldOut) => {
+  const newProduct = {name, imagePath, imageAlt, description, price, soldOut};
+  allProducts.push(newProduct);
+
+}
+
+addNewProduct("Butt Cream", "https://target.scene7.com/is/image/Target/656609?wid=520&hei=520&fmt=pjpeg", "Product: Butt Cream", "awesome stuff", 4.99, soldOut=true)
+
+
 console.log("All my weird baby products: ", allProducts);
 
 
 
 
-var productContainer = document.getElementById("product-container");
+const productContainer = document.getElementById("product-container");
 
 // debugger;
 
-  function buildDomString(product){
+  const buildDomString = (product) => {
     var domString = "";
 
     domString += '<section class="product">';
@@ -81,34 +103,28 @@ var productContainer = document.getElementById("product-container");
         domString += '</div>';
     }
 
-
     domString += '</section>';
     return domString;
   }
 
-
-
-  function printProductArrayToDom(productArray){
-    for (var i = 0; i < productArray.length; i++) {
-
-
-  var currentProduct = productArray[i];
-  var productDomString = buildDomString(currentProduct);
-  productContainer.innerHTML += productDomString;
-  }
+  const printProductArrayToDom = (productArray) =>{
+    for (let i = 0; i < productArray.length; i++) {
+    const currentProduct = productArray[i];
+    const productDomString = buildDomString(currentProduct);
+    productContainer.innerHTML += productDomString;
+    }
 }
 
 printProductArrayToDom(allProducts);
 
-var selectedCard;
+let selectedCard;
 
-document.getElementById("product-container").addEventListener("click", function(event){
+document.getElementById("product-container").addEventListener("click", (event) => {
   changeBorder(event);
   printSelectedDescription();
 })
 
-
-function changeBorder(event) {
+const changeBorder = (event) => {
   if (event.target.classList.contains("child")){
     selectedCard = event.target.parentNode;
   } else if (event.target.parentNode.parentNode.classList.contains("product")){
@@ -120,11 +136,9 @@ function changeBorder(event) {
     selectedCard.classList.add("border-funsies");
 }
  
-function printSelectedDescription() {
-
-  var description = selectedCard.childNodes[2].childNodes[0].innerHTML;
+const printSelectedDescription = () => {
+  const description = selectedCard.childNodes[2].childNodes[0].innerHTML;
   console.log(description);
-
 }
 
 
